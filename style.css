@@ -1,0 +1,14 @@
+.calculator {
+    display: flex;
+    justify-content: center;
+}
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 60px);
+    grid-template-rows: repeat(5, 35px);
+    column-gap: 6px;
+    row-gap: 6px;
+}
+#plusKey {
+    grid-area: 4 / 4 / 6 / 5;
+}
