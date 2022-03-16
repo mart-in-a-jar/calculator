@@ -49,4 +49,17 @@
 }
 .key {
     font-size: 1em;
+    background-color: rgb(196, 202, 200);
+}
+.operator {
+    background-color: rgb(73, 97, 97);
+}
+.enter {
+    background-color: rgb(127, 189, 127);
+}
+.clear {
+    background-color: rgb(197, 120, 120);
+}
+.minus {
+    background-color: antiquewhite;
 }
