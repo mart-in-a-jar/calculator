@@ -74,11 +74,16 @@ function updateHistoryDisplay(opr) {
 }
 
 function execute() {
+    if (!historyValue) {
+        historyDisplay.textContent = `${displayValue} =`;
+        result = displayValue;
+    }
     // so you can press enter directly on a result to repeat it
-    if (isExecuted()) {
+    else if (isExecuted()) {
         historyDisplay.textContent = `${result} ${operator} ${operand} =`;
         result = String(Math.round(operate(operator, +displayValue, operand) * 1000) / 1000);
     } else {
+        if (!displayValue) displayValue = String(historyValue);
         historyDisplay.textContent += " " + displayValue + " =";
         operand = +displayValue;
         result = String(Math.round(operate(operator, historyValue, +displayValue) * 1000) / 1000);
