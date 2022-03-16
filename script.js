@@ -31,7 +31,7 @@ function operate(operator, num1, num2) {
 }
 
 let displayValue = "0";
-let historyValue = "";
+let historyValue = null;
 let operator, result, operand;
 
 function updateDisplayValue(input) {
@@ -56,13 +56,13 @@ function backspace() {
 
 function clearAll() {
     displayValue = "0";
-    historyValue = "";
+    historyValue = null;
     inputDisplay.textContent = displayValue;
     historyDisplay.textContent = "";
 }
 
 function updateHistoryDisplay(opr) {
-    if (historyValue && displayValue && !isExecuted()) {
+    if (historyValue != null && displayValue && !isExecuted()) {
         execute();
     }
     operator = opr;
@@ -74,7 +74,7 @@ function updateHistoryDisplay(opr) {
 }
 
 function execute() {
-    if (!historyValue) {
+    if (historyValue == null) {
         historyDisplay.textContent = `${displayValue} =`;
         result = displayValue;
     }
