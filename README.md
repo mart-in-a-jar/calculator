@@ -1,3 +1,3 @@
 # Calculator app
 
-[Live preview](https://github.com/mart-in-a-jar/calculator/blob/main/index.html)
+[Live preview](http://raw.githack.com/mart-in-a-jar/calculator/main/index.html)
