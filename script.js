@@ -70,17 +70,17 @@ function updateHistoryDisplay(opr) {
         historyValue = +displayValue;
         updateDisplayValue();
     }
-    historyDisplay.textContent = historyValue + " " + operator;
+    historyDisplay.textContent = historyValue + " " + getOperator();
 }
 
-function execute() {
+function execute() {    
     if (historyValue == null) {
         historyDisplay.textContent = `${displayValue} =`;
         result = displayValue;
     }
     // so you can press enter directly on a result to repeat it
     else if (isExecuted()) {
-        historyDisplay.textContent = `${result} ${operator} ${operand} =`;
+        historyDisplay.textContent = `${result} ${getOperator()} ${operand} =`;
         result = String(Math.round(operate(operator, +displayValue, operand) * 1000) / 1000);
     } else {
         if (!displayValue) displayValue = String(historyValue);
@@ -90,6 +90,17 @@ function execute() {
     }
     displayValue = result;
     inputDisplay.textContent = displayValue;
+}
+
+function getOperator() {
+    switch (operator) {
+        case "*":
+            return "×";
+        case "/":
+            return "÷";
+        default:
+            return operator;
+    }
 }
 
 function isExecuted() {
