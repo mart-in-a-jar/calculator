@@ -25,15 +25,17 @@ function operate(operator, num1, num2) {
         case "*":
             return multiply(num1, num2);
         case "/":
-            return divide(num1, num2);
+            if (num2 === 0) return NaN;
+            else return divide(num1, num2);
     }
 }
 
 let displayValue = "0";
 let historyValue = "";
-let operator;
+let operator, result;
 
 function updateDisplayValue(input) {
+    if (isExecuted() && input) clearAll();
     if (displayValue.includes(".") && input === ".") return;
     if (displayValue === "0" && input != ".") displayValue = "";
     if (input === "negative") {
@@ -46,6 +48,7 @@ function updateDisplayValue(input) {
 }
 
 function backspace() {
+    if (isExecuted()) clearAll();
     if (displayValue.length === 1) displayValue = "0";
     else displayValue = displayValue.slice(0, -1);
     inputDisplay.textContent = displayValue;
@@ -58,7 +61,11 @@ function clearAll() {
     historyDisplay.textContent = "";
 }
 
-function updateHistoryDisplay() {
+function updateHistoryDisplay(opr) {
+    if (historyValue && displayValue && !isExecuted()) {
+        execute();
+    }
+    operator = opr;
     if (displayValue) {
         historyValue = +displayValue;
         updateDisplayValue();
@@ -67,9 +74,17 @@ function updateHistoryDisplay() {
 }
 
 function execute() {
-    historyDisplay.textContent += " " + displayValue + " =";
-    displayValue = String(Math.round(operate(operator, historyValue, +displayValue) * 1000) / 1000);
+    if (isExecuted()) {
+        historyDisplay.textContent = `${result} ${operator} ${historyValue} =`;
+    } else historyDisplay.textContent += " " + displayValue + " =";
+    result = String(Math.round(operate(operator, historyValue, +displayValue) * 1000) / 1000);
+    displayValue = result;
+    historyValue = +displayValue;
     inputDisplay.textContent = displayValue;
+}
+
+function isExecuted() {
+    return historyDisplay.textContent.includes("=");
 }
 
 const buttons = document.querySelectorAll(".key");
@@ -89,14 +104,10 @@ window.addEventListener("keydown", e => {
 });
 
 function evaluateInput(input) {
-    // if (!isNaN(input) || input === ".") {
-    //     updateDisplayValue(input);
-    // }
     if (input === "Backspace") backspace();
     else if (input === "Escape") clearAll();
     else if (operators.includes(input)) {
-        operator = input;
-        updateHistoryDisplay();
+        updateHistoryDisplay(input);
     }
     else if (input === "Enter") execute();
     else {
