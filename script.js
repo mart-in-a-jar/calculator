@@ -95,6 +95,7 @@ const buttons = document.querySelectorAll(".key");
 const inputDisplay = document.querySelector(".input");
 const historyDisplay = document.querySelector(".history");
 
+// list of all data-key values from the buttons
 const allowedInputs = [...buttons].map(button => button.dataset.key);
 
 buttons.forEach(button => {
