@@ -32,7 +32,7 @@ function operate(operator, num1, num2) {
 
 let displayValue = "0";
 let historyValue = "";
-let operator, result;
+let operator, result, operand;
 
 function updateDisplayValue(input) {
     if (isExecuted() && input) clearAll();
@@ -74,12 +74,16 @@ function updateHistoryDisplay(opr) {
 }
 
 function execute() {
+    // so you can press enter directly on a result to repeat it
     if (isExecuted()) {
-        historyDisplay.textContent = `${result} ${operator} ${historyValue} =`;
-    } else historyDisplay.textContent += " " + displayValue + " =";
-    result = String(Math.round(operate(operator, historyValue, +displayValue) * 1000) / 1000);
+        historyDisplay.textContent = `${result} ${operator} ${operand} =`;
+        result = String(Math.round(operate(operator, +displayValue, operand) * 1000) / 1000);
+    } else {
+        historyDisplay.textContent += " " + displayValue + " =";
+        operand = +displayValue;
+        result = String(Math.round(operate(operator, historyValue, +displayValue) * 1000) / 1000);
+    }
     displayValue = result;
-    historyValue = +displayValue;
     inputDisplay.textContent = displayValue;
 }
 
