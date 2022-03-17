@@ -110,6 +110,7 @@ function isExecuted() {
 const buttons = document.querySelectorAll(".key");
 const inputDisplay = document.querySelector(".input");
 const historyDisplay = document.querySelector(".history");
+const toolTip = document.querySelector(".toolTip");
 
 // list of all data-key values from the buttons
 const allowedInputs = [...buttons].map(button => button.dataset.key);
@@ -123,6 +124,15 @@ buttons.forEach(button => {
 
 window.addEventListener("keydown", e => {
     if (allowedInputs.includes(e.key)) evaluateInput(e.key);
+});
+
+// click to copy
+inputDisplay.addEventListener("click", e => {
+    navigator.clipboard.writeText(e.target.textContent);
+    toolTip.style["display"] = "inline";
+    setTimeout(() => {
+        toolTip.style["display"] = "none";
+    }, 1000);
 });
 
 function evaluateInput(input) {

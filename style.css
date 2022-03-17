@@ -30,12 +30,26 @@ html {
     background-color: rgb(221, 221, 221);
     min-height: 80px;
     text-align: right;
+    position: relative;
 }
 .input {
     padding-right: 5px;
     font-size: 3em;
     font-family: calcFont, sans-serif;
     min-height: 55px;
+}
+.input:hover {
+    cursor: pointer;
+}
+.toolTip {
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    background-color: #000000df;
+    border-radius: 4px;
+    color: #fff;
+    padding: 6px;
+    display: none; /* Gets visible by function */
 }
 .history {
     padding-right: 5px;
