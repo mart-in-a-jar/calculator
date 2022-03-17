@@ -117,6 +117,7 @@ const allowedInputs = [...buttons].map(button => button.dataset.key);
 buttons.forEach(button => {
     button.addEventListener("click", e => {
             evaluateInput(e.target.getAttribute("data-key"));
+            e.target.blur();
     });
 });
 
