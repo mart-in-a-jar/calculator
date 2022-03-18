@@ -49,7 +49,7 @@ function updateDisplayValue(input) {
 
 function backspace() {
     if (isExecuted()) clearAll();
-    if (displayValue.length === 1) displayValue = "0";
+    else if (displayValue.length === 1) displayValue = "0";
     else displayValue = displayValue.slice(0, -1);
     inputDisplay.textContent = displayValue;
 }
@@ -70,7 +70,7 @@ function updateHistoryDisplay(opr) {
         historyValue = +displayValue;
         updateDisplayValue();
     }
-    historyDisplay.textContent = historyValue + " " + getOperator();
+    historyDisplay.textContent = `${historyValue} ${getOperator()}`;
 }
 
 function execute() {    
@@ -84,7 +84,7 @@ function execute() {
         result = String(Math.round(operate(operator, +displayValue, operand) * 1000) / 1000);
     } else {
         if (!displayValue) displayValue = String(historyValue);
-        historyDisplay.textContent += " " + displayValue + " =";
+        historyDisplay.textContent += ` ${displayValue} =`;
         operand = +displayValue;
         result = String(Math.round(operate(operator, historyValue, +displayValue) * 1000) / 1000);
     }
