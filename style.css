@@ -69,7 +69,7 @@ html {
     grid-area: 4 / 4 / 6 / 5;
 }
 .key {
-    font-size: 1em;
+    font-size: 1.3em;
     background-color: rgb(196, 202, 200);
 }
 .operator {
